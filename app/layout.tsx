@@ -12,9 +12,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "NextByte",
-  description: "NextByte - Nowoczesne strony internetowe dla firm",
+export const metadata = {
+  title: "NextByte | Nowoczesne strony internetowe",
+  description:
+    "NextByte tworzy nowoczesne strony internetowe dla firm, landing page i profesjonalne portfolio.",
 };
 
 export default function RootLayout({
