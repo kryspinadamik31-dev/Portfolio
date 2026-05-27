@@ -5,32 +5,17 @@ export default function PortfolioWebsite() {
     {
       title: "Detailing Studio",
       desc: "Nowoczesna strona dla studia auto detailingu z animacjami i formularzem kontaktowym.",
+      href: "/projekty/black-diamond-detailing",
     },
     {
       title: "Restaurant Landing",
       desc: "Elegancki landing page dla restauracji premium z rezerwacją online.",
+      href: "/projekty",
     },
     {
       title: "Construction Company",
       desc: "Profesjonalna strona firmy budowlanej nastawiona na pozyskiwanie klientów.",
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Michał K.",
-      company: "Black Diamond Detailing",
-      text: "Strona wygląda premium, działa szybko i od razu lepiej prezentuje naszą ofertę klientom.",
-    },
-    {
-      name: "Anna W.",
-      company: "Kancelaria prawna",
-      text: "Profesjonalny kontakt, nowoczesny projekt i bardzo dobra wersja mobilna strony.",
-    },
-    {
-      name: "Piotr N.",
-      company: "Restauracja NERO",
-      text: "Dokładnie taki efekt chcieliśmy — elegancka strona, która wygląda świetnie na telefonie.",
+      href: "/projekty",
     },
   ];
 
@@ -138,8 +123,26 @@ export default function PortfolioWebsite() {
               key={index}
               className="group bg-zinc-900 border border-white/10 rounded-[28px] overflow-hidden hover:border-white/20 hover:-translate-y-2 transition duration-300"
             >
-              <div className="h-56 bg-gradient-to-br from-zinc-800 to-zinc-950 flex items-center justify-center text-zinc-500 text-sm">
-                Preview projektu
+              <div className="h-64 bg-black p-4">
+                <div className="h-full rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 group-hover:scale-[1.03] transition duration-500">
+                  <div className="h-8 bg-zinc-900 border-b border-white/10 flex items-center gap-2 px-4">
+                    <span className="w-3 h-3 rounded-full bg-red-500"></span>
+                    <span className="w-3 h-3 rounded-full bg-yellow-500"></span>
+                    <span className="w-3 h-3 rounded-full bg-green-500"></span>
+                  </div>
+
+                  <div className="h-full bg-gradient-to-br from-zinc-800 via-black to-zinc-950 p-5">
+                    <div className="h-4 w-24 rounded-full bg-white/20 mb-5"></div>
+                    <div className="h-8 w-3/4 rounded-xl bg-white/30 mb-4"></div>
+                    <div className="h-3 w-full rounded bg-white/10 mb-2"></div>
+                    <div className="h-3 w-2/3 rounded bg-white/10 mb-6"></div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="h-20 rounded-xl bg-white/10"></div>
+                      <div className="h-20 rounded-xl bg-white/10"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="p-7">
@@ -149,9 +152,12 @@ export default function PortfolioWebsite() {
                   {project.desc}
                 </p>
 
-                <button className="mt-8 px-5 py-3 rounded-xl bg-white text-black font-semibold hover:scale-105 transition">
+                <Link
+                  href={project.href}
+                  className="mt-8 inline-block px-5 py-3 rounded-xl bg-white text-black font-semibold hover:scale-105 transition"
+                >
                   Live Demo
-                </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -186,52 +192,6 @@ export default function PortfolioWebsite() {
               className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:bg-zinc-800 hover:-translate-y-1 transition duration-300"
             >
               <p className="font-semibold">{tech}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10">
-        <div className="text-center max-w-3xl mx-auto">
-          <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
-            Opinie
-          </p>
-
-          <h2 className="text-4xl lg:text-5xl font-black">
-            Firmy cenią NextByte za jakość i efekt.
-          </h2>
-
-          <p className="text-zinc-400 mt-6 text-lg leading-relaxed">
-            Przykładowe opinie klientów po wdrożeniu nowoczesnych stron
-            internetowych.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8 mt-16">
-          {testimonials.map((opinion, index) => (
-            <div
-              key={index}
-              className="group relative bg-zinc-900 border border-white/10 rounded-[28px] p-7 overflow-hidden hover:border-white/30 hover:-translate-y-2 transition duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
-
-              <div className="relative">
-                <div className="flex gap-1 text-yellow-400 text-xl mb-6">
-                  ★★★★★
-                </div>
-
-                <p className="text-zinc-300 leading-relaxed">
-                  “{opinion.text}”
-                </p>
-
-                <div className="mt-8 pt-6 border-t border-white/10">
-                  <h3 className="font-bold text-lg">{opinion.name}</h3>
-                  <p className="text-zinc-500 text-sm mt-1">
-                    {opinion.company}
-                  </p>
-                </div>
-              </div>
             </div>
           ))}
         </div>
