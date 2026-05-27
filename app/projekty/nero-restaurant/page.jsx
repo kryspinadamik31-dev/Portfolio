@@ -42,10 +42,10 @@ export default function NeroRestaurantPage() {
         <div className="nero-logo">NERO</div>
 
         <nav>
-          <a href="#about">O nas</a>
-          <a href="#menu">Menu</a>
-          <a href="#gallery">Galeria</a>
-          <a href="#reserve">Rezerwacja</a>
+          <a href="#about" className="nero-nav-link">O nas</a>
+          <a href="#menu" className="nero-nav-link">Menu</a>
+          <a href="#gallery" className="nero-nav-link">Galeria</a>
+          <a href="#reserve" className="nero-nav-link">Rezerwacja</a>
         </nav>
       </header>
 
@@ -61,11 +61,11 @@ export default function NeroRestaurantPage() {
           </p>
 
           <div className="nero-actions">
-            <a href="#reserve" className="nero-btn nero-primary">
+            <a href="#reserve" className="nero-btn nero-primary nero-scroll">
               Zarezerwuj stolik
             </a>
 
-            <a href="#menu" className="nero-btn nero-secondary">
+            <a href="#menu" className="nero-btn nero-secondary nero-scroll">
               Zobacz menu
             </a>
           </div>
