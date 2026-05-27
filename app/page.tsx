@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default function PortfolioWebsite() {
   const [showPopup, setShowPopup] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const projects = [
     {
@@ -20,48 +21,84 @@ export default function PortfolioWebsite() {
     {
       title: "Construction Company",
       desc: "Profesjonalna strona firmy budowlanej nastawiona na pozyskiwanie klientów.",
-      href: "/projekty",
+      href: "/projekty/kowalski-partners",
     },
   ];
 
   useEffect(() => {
-  const closed = sessionStorage.getItem("nextbytePopupClosed");
-
-  if (closed) return;
-
-  let timeout;
-
-  function handleVisibilityChange() {
-    if (document.visibilityState === "hidden") {
-      timeout = setTimeout(() => {
-        setShowPopup(true);
-      }, 20000);
+    function handleScroll() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      setScrollProgress((scrollTop / docHeight) * 100);
     }
 
-    if (document.visibilityState === "visible") {
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const elements = document.querySelectorAll(".reveal");
+
+    function revealOnScroll() {
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+
+        if (rect.top < window.innerHeight - 90) {
+          el.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+
+    return () => window.removeEventListener("scroll", revealOnScroll);
+  }, []);
+
+  useEffect(() => {
+    const closed = sessionStorage.getItem("nextbytePopupClosed");
+    if (closed) return;
+
+    let timeout;
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "hidden") {
+        timeout = setTimeout(() => {
+          setShowPopup(true);
+        }, 20000);
+      }
+
+      if (document.visibilityState === "visible") {
+        clearTimeout(timeout);
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
       clearTimeout(timeout);
-    }
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  function closePopup() {
+    sessionStorage.setItem("nextbytePopupClosed", "true");
+    setShowPopup(false);
   }
 
-  document.addEventListener("visibilitychange", handleVisibilityChange);
-
-  return () => {
-    clearTimeout(timeout);
-    document.removeEventListener(
-      "visibilitychange",
-      handleVisibilityChange
-    );
-  };
-}, []);
-
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
-      {/* HERO */}
+    <div className="min-h-screen bg-black text-white font-sans overflow-hidden">
+      <div className="fixed top-0 left-0 z-[9999] h-1 bg-white transition-all duration-150" style={{ width: `${scrollProgress}%` }} />
+
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-950 opacity-90" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-zinc-700/20 rounded-full blur-[100px]" />
 
         <div className="relative max-w-7xl mx-auto px-6 py-28 lg:py-40 grid lg:grid-cols-2 gap-16 items-center">
-          <div>
+          <div className="reveal">
             <div className="inline-flex items-center gap-2 border border-white/10 bg-white/5 px-4 py-2 rounded-full text-sm text-zinc-300 mb-8">
               ⚡ Web Creator & Frontend Developer
             </div>
@@ -76,23 +113,17 @@ export default function PortfolioWebsite() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/projekty"
-                className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
-              >
+              <Link href="/projekty" className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition">
                 Zobacz projekty
               </Link>
 
-              <Link
-                href="/kontakt"
-                className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
-              >
+              <Link href="/kontakt" className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition">
                 Kontakt
               </Link>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 gap-5 reveal">
             {[
               ["🔥", "Modern UI", "Minimalistyczny i nowoczesny design."],
               ["⚡", "Fast Websites", "Szybkie strony zoptymalizowane pod SEO."],
@@ -101,7 +132,7 @@ export default function PortfolioWebsite() {
             ].map(([icon, title, desc], index) => (
               <div
                 key={title}
-                className={`bg-zinc-900 border border-white/10 rounded-3xl p-6 h-56 flex flex-col justify-between hover:-translate-y-2 hover:border-white/20 transition duration-300 ${
+                className={`bg-zinc-900/80 backdrop-blur border border-white/10 rounded-3xl p-6 h-56 flex flex-col justify-between hover:-translate-y-2 hover:border-white/30 hover:bg-zinc-800 transition duration-300 ${
                   index === 1 ? "mt-10" : index === 2 ? "-mt-6" : ""
                 }`}
               >
@@ -116,8 +147,7 @@ export default function PortfolioWebsite() {
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section className="max-w-7xl mx-auto px-6 py-28">
+      <section className="max-w-7xl mx-auto px-6 py-28 reveal">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
@@ -129,35 +159,26 @@ export default function PortfolioWebsite() {
             </h2>
           </div>
 
-          <div>
-            <p className="text-zinc-400 text-lg leading-relaxed">
-              Tworzę strony internetowe, które łączą nowoczesny design,
-              szybkość działania oraz skuteczność biznesową. Każdy projekt jest
-              responsywny i dostosowany do potrzeb klienta.
-            </p>
-          </div>
+          <p className="text-zinc-400 text-lg leading-relaxed">
+            Tworzę strony internetowe, które łączą nowoczesny design,
+            szybkość działania oraz skuteczność biznesową. Każdy projekt jest
+            responsywny i dostosowany do potrzeb klienta.
+          </p>
         </div>
       </section>
 
-      {/* PROJECTS */}
-      <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10">
-        <div className="flex items-end justify-between mb-16">
-          <div>
-            <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
-              Portfolio
-            </p>
-            <h2 className="text-4xl lg:text-5xl font-black">
-              Wybrane projekty
-            </h2>
-          </div>
-        </div>
+      <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10 reveal">
+        <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
+          Portfolio
+        </p>
+
+        <h2 className="text-4xl lg:text-5xl font-black mb-16">
+          Wybrane projekty
+        </h2>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div
-              key={index}
-              className="group bg-zinc-900 border border-white/10 rounded-[28px] overflow-hidden hover:border-white/20 hover:-translate-y-2 transition duration-300"
-            >
+            <div key={index} className="group bg-zinc-900 border border-white/10 rounded-[28px] overflow-hidden hover:border-white/30 hover:-translate-y-2 transition duration-300">
               <div className="h-64 bg-black p-4">
                 <div className="h-full rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 group-hover:scale-[1.03] transition duration-500">
                   <div className="h-8 bg-zinc-900 border-b border-white/10 flex items-center gap-2 px-4">
@@ -187,10 +208,7 @@ export default function PortfolioWebsite() {
                   {project.desc}
                 </p>
 
-                <Link
-                  href={project.href}
-                  className="mt-8 inline-block px-5 py-3 rounded-xl bg-white text-black font-semibold hover:scale-105 transition"
-                >
+                <Link href={project.href} className="mt-8 inline-block px-5 py-3 rounded-xl bg-white text-black font-semibold hover:scale-105 transition">
                   Live Demo
                 </Link>
               </div>
@@ -199,8 +217,7 @@ export default function PortfolioWebsite() {
         </div>
       </section>
 
-      {/* TECH STACK */}
-      <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10">
+      <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10 reveal">
         <div className="text-center max-w-3xl mx-auto">
           <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
             Technologie
@@ -212,76 +229,56 @@ export default function PortfolioWebsite() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-          {[
-            "React",
-            "Next.js",
-            "Tailwind",
-            "WordPress",
-            "JavaScript",
-            "Framer Motion",
-            "SEO",
-            "Vercel",
-          ].map((tech) => (
-            <div
-              key={tech}
-              className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:bg-zinc-800 hover:-translate-y-1 transition duration-300"
-            >
+          {["React", "Next.js", "Tailwind", "WordPress", "JavaScript", "Framer Motion", "SEO", "Vercel"].map((tech) => (
+            <div key={tech} className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:bg-zinc-800 hover:-translate-y-1 transition duration-300">
               <p className="font-semibold">{tech}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10">
-        <div className="bg-zinc-900 border border-white/10 rounded-[32px] p-10 lg:p-20 text-center">
-          <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
-            Kontakt
-          </p>
+      <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10 reveal">
+        <div className="bg-zinc-900 border border-white/10 rounded-[32px] p-10 lg:p-20 text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40" />
 
-          <h2 className="text-4xl lg:text-6xl font-black leading-tight">
-            Masz pomysł na stronę?
-          </h2>
-
-          <p className="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
-            Napisz do mnie i stwórzmy nowoczesną stronę internetową dla Twojej
-            firmy.
-          </p>
-
-          <div className="mt-10 flex justify-center gap-4 flex-wrap">
-            <Link
-              href="/kontakt"
-              className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
-            >
+          <div className="relative">
+            <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
               Kontakt
-            </Link>
+            </p>
 
-            <a
-              href="https://github.com/kryspinadamik31-dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
-            >
-              GitHub
-            </a>
+            <h2 className="text-4xl lg:text-6xl font-black leading-tight">
+              Masz pomysł na stronę?
+            </h2>
+
+            <p className="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
+              Napisz do mnie i stwórzmy nowoczesną stronę internetową dla Twojej firmy.
+            </p>
+
+            <div className="mt-10 flex justify-center gap-4 flex-wrap">
+              <Link href="/kontakt" className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition">
+                Kontakt
+              </Link>
+
+              <a href="https://github.com/kryspinadamik31-dev" target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition">
+                GitHub
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="border-t border-white/10 py-8 px-6 text-center text-zinc-500 text-sm">
         © 2026 NextByte — Web Creator
       </footer>
 
-      {/* POPUP */}
+      <Link href="/kontakt" className="fixed bottom-6 right-6 z-50 hidden md:flex items-center gap-3 px-5 py-4 rounded-2xl bg-white text-black font-bold shadow-2xl hover:scale-105 transition">
+        ✉️ Darmowa wycena
+      </Link>
+
       {showPopup && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-md px-5">
           <div className="relative w-full max-w-[520px] rounded-[28px] bg-white text-black border-t-4 border-zinc-900 p-8 md:p-10 text-center shadow-2xl animate-[popupIn_.35s_ease]">
-            <button
-              onClick={closePopup}
-              className="absolute top-4 right-5 text-3xl text-zinc-400 hover:text-black transition"
-              aria-label="Zamknij popup"
-            >
+            <button onClick={closePopup} className="absolute top-4 right-5 text-3xl text-zinc-400 hover:text-black transition" aria-label="Zamknij popup">
               ×
             </button>
 
@@ -298,10 +295,7 @@ export default function PortfolioWebsite() {
               odpowiem osobiście.
             </p>
 
-            <a
-              href="tel:882684053"
-              className="mt-7 flex items-center justify-center gap-3 w-full rounded-2xl bg-black text-white py-5 font-bold hover:scale-[1.02] transition"
-            >
+            <a href="tel:882684053" className="mt-7 flex items-center justify-center gap-3 w-full rounded-2xl bg-black text-white py-5 font-bold hover:scale-[1.02] transition">
               ☎ Zadzwoń, 882 684 053
             </a>
 
@@ -311,20 +305,11 @@ export default function PortfolioWebsite() {
               <span className="h-px flex-1 bg-zinc-200"></span>
             </div>
 
-            <a
-              href="https://wa.me/48882684053"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 w-full rounded-2xl border-2 border-green-500 text-green-700 py-5 font-bold hover:bg-green-50 transition"
-            >
+            <a href="https://wa.me/48882684053" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 w-full rounded-2xl border-2 border-green-500 text-green-700 py-5 font-bold hover:bg-green-50 transition">
               Napisz na WhatsApp
             </a>
 
-            <Link
-              href="/kontakt"
-              onClick={closePopup}
-              className="mt-4 block w-full rounded-2xl border border-zinc-200 py-4 font-semibold text-zinc-700 hover:bg-zinc-100 transition"
-            >
+            <Link href="/kontakt" onClick={closePopup} className="mt-4 block w-full rounded-2xl border border-zinc-200 py-4 font-semibold text-zinc-700 hover:bg-zinc-100 transition">
               Przejdź do formularza
             </Link>
 
@@ -332,21 +317,37 @@ export default function PortfolioWebsite() {
               Pn–Pt 9:00–19:00 · Rozmowa bez zobowiązań
             </small>
           </div>
-
-          <style jsx>{`
-            @keyframes popupIn {
-              from {
-                opacity: 0;
-                transform: translateY(25px) scale(0.96);
-              }
-              to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-              }
-            }
-          `}</style>
         </div>
       )}
+
+      <style jsx global>{`
+        html {
+          scroll-behavior: smooth;
+        }
+
+        .reveal {
+          opacity: 0;
+          transform: translateY(35px);
+          transition: 0.8s ease;
+          will-change: transform, opacity;
+        }
+
+        .reveal.active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        @keyframes popupIn {
+          from {
+            opacity: 0;
+            transform: translateY(25px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+      `}</style>
     </div>
   );
 }
