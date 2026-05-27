@@ -26,91 +26,81 @@ export default function KowalskiPartnersPage() {
   return (
     <main className="kp-page">
       <header className="kp-navbar">
+        <Link href="/projekty" className="kp-back">
+          ← Portfolio
+        </Link>
+
         <div className="kp-logo">
           Kowalski<span>&Partners</span>
         </div>
 
         <nav>
-          <a href="#services">Specjalizacje</a>
-          <a href="#about">O kancelarii</a>
-          <a href="#process">Proces</a>
-          <a href="#contact">Kontakt</a>
+          <a href="#specializacje">Specjalizacje</a>
+          <a href="#proces">Współpraca</a>
+          <a href="#cennik">Konsultacja</a>
+          <a href="#kontakt">Kontakt</a>
         </nav>
-
-        <Link href="/projekty" className="kp-nav-btn">
-          Powrót
-        </Link>
       </header>
 
       <section className="kp-hero">
-        <div className="kp-hero-content kp-reveal">
-          <p className="kp-eyebrow">Kancelaria prawna dla biznesu</p>
+        <div className="kp-hero-inner">
+          <div className="kp-hero-text kp-reveal">
+            <p className="kp-eyebrow">Kancelaria prawna online i stacjonarnie</p>
 
-          <h1>Nowoczesne wsparcie prawne dla firm.</h1>
+            <h1>Prawo wyjaśnione prosto. Strategia zamiast chaosu.</h1>
 
-          <p>
-            Pomagamy przedsiębiorcom podejmować bezpieczne decyzje, chronić
-            interesy firmy i sprawnie rozwiązywać problemy prawne.
-          </p>
+            <p>
+              Pomagamy osobom prywatnym i firmom przejść przez trudne sprawy
+              prawne spokojnie, konkretnie i z pełnym planem działania.
+            </p>
 
-          <div className="kp-hero-buttons">
-            <a href="#contact" className="kp-btn kp-primary">
-              Umów konsultację
-            </a>
+            <div className="kp-hero-actions">
+              <a href="#kontakt" className="kp-btn kp-primary">
+                Umów konsultację
+              </a>
 
-            <a href="#services" className="kp-btn kp-secondary">
-              Zobacz specjalizacje
-            </a>
+              <a href="#specializacje" className="kp-btn kp-secondary">
+                Zobacz specjalizacje
+              </a>
+            </div>
+          </div>
+
+          <div className="kp-consult-card kp-reveal">
+            <p>Konsultacja prawna</p>
+            <strong>250 zł</strong>
+            <span>online albo w kancelarii · bez pośpiechu</span>
+            <a href="#kontakt">Wybierz termin</a>
           </div>
         </div>
-
-        <div className="kp-hero-card kp-reveal">
-          <p>Skuteczność</p>
-          <strong>98%</strong>
-          <span>spraw zakończonych pozytywnie</span>
-        </div>
       </section>
 
-      <section className="kp-section kp-intro" id="about">
+      <section className="kp-section kp-intro">
         <div className="kp-reveal">
           <p className="kp-eyebrow kp-blue">O kancelarii</p>
-          <h2>Prawo podane jasno, konkretnie i biznesowo.</h2>
+          <h2>Tysiące porad, setki spraw i jasne zasady współpracy.</h2>
         </div>
 
-        <p className="kp-reveal">
-          Kowalski & Partners to kancelaria łącząca doświadczenie prawne z
-          praktycznym podejściem do biznesu. Skupiamy się na rozwiązaniach,
-          które są zrozumiałe, szybkie i realnie wspierają rozwój firm.
-        </p>
-      </section>
+        <div className="kp-reveal">
+          <p>
+            Kowalski & Partners to kancelaria, która stawia na konkret:
+            analizę dokumentów, realne scenariusze i przejrzyste warunki
+            prowadzenia sprawy. Bez prawniczego żargonu i bez obietnic bez
+            pokrycia.
+          </p>
 
-      <section className="kp-section" id="services">
-        <div className="kp-center kp-reveal">
-          <p className="kp-eyebrow kp-blue">Specjalizacje</p>
-          <h2>Obszary, w których pomagamy.</h2>
-        </div>
-
-        <div className="kp-services">
-          {[
-            ["Prawo gospodarcze", "Obsługa spółek, umowy handlowe, zabezpieczanie transakcji i bieżące doradztwo."],
-            ["Prawo pracy", "Umowy, regulaminy, spory pracownicze i wsparcie działów HR."],
-            ["RODO i compliance", "Audyt zgodności, dokumentacja, procedury i bezpieczeństwo danych."],
-            ["Spory sądowe", "Reprezentacja w sporach gospodarczych oraz negocjacje przedsądowe."],
-          ].map(([title, desc]) => (
-            <div className="kp-service kp-reveal" key={title}>
-              <span>§</span>
-              <h3>{title}</h3>
-              <p>{desc}</p>
-            </div>
-          ))}
+          <p>
+            Pracujemy z klientami indywidualnymi oraz przedsiębiorcami — od
+            pierwszej konsultacji, przez negocjacje, aż po reprezentację przed
+            sądem.
+          </p>
         </div>
       </section>
 
       <section className="kp-stats">
         {[
-          ["12+", "lat doświadczenia"],
-          ["240+", "obsłużonych firm"],
-          ["98%", "skuteczności"],
+          ["14+", "lat doświadczenia"],
+          ["800+", "udzielonych konsultacji"],
+          ["300+", "spraw klientów"],
         ].map(([number, label]) => (
           <div className="kp-stat kp-reveal" key={label}>
             <strong>{number}</strong>
@@ -119,67 +109,186 @@ export default function KowalskiPartnersPage() {
         ))}
       </section>
 
-      <section className="kp-section kp-process" id="process">
-        <div className="kp-center kp-reveal">
-          <p className="kp-eyebrow kp-blue">Proces współpracy</p>
-          <h2>Prosto, przejrzyście, bez chaosu.</h2>
-        </div>
-
-        <div className="kp-timeline">
-          {[
-            "Krótka analiza problemu",
-            "Propozycja rozwiązania",
-            "Wycena i zakres współpracy",
-            "Realizacja i bieżące wsparcie",
-          ].map((step, index) => (
-            <div className="kp-step kp-reveal" key={step}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              {step}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="kp-section kp-testimonials">
-        <div className="kp-center kp-reveal">
-          <p className="kp-eyebrow kp-blue">Opinie</p>
-          <h2>Zaufanie klientów biznesowych.</h2>
-        </div>
-
-        <div className="kp-opinions">
-          {[
-            ["Bardzo konkretna obsługa i jasne wyjaśnienia. W końcu kancelaria, która mówi językiem biznesu.", "CEO, firma technologiczna"],
-            ["Szybka analiza umów i świetny kontakt. Polecam każdej firmie, która chce mieć porządek prawny.", "Właściciel, e-commerce"],
-          ].map(([text, author]) => (
-            <div className="kp-opinion kp-reveal" key={author}>
-              <div className="kp-stars">★★★★★</div>
-              <p>“{text}”</p>
-              <strong>{author}</strong>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="kp-contact" id="contact">
-        <div className="kp-contact-box kp-reveal">
-          <p className="kp-eyebrow kp-blue">Kontakt</p>
-
-          <h2>Potrzebujesz wsparcia prawnego?</h2>
-
+      <section className="kp-section" id="specializacje">
+        <div className="kp-section-head kp-reveal">
+          <p className="kp-eyebrow kp-blue">Specjalizacje</p>
+          <h2>Sprawy, w których pomagamy najczęściej.</h2>
           <p>
-            Umów konsultację i sprawdź, jak możemy zabezpieczyć interesy Twojej
-            firmy.
+            Każda sprawa zaczyna się od rozmowy i oceny, czy możemy realnie
+            pomóc.
           </p>
+        </div>
 
-          <form>
+        <div className="kp-special-grid">
+          {[
+            [
+              "Prawo rodzinne",
+              "Rozwody, alimenty, kontakty z dzieckiem, podział majątku oraz strategia procesowa.",
+              "Porozmawiajmy o Twojej sytuacji",
+            ],
+            [
+              "Spadki i zachowek",
+              "Testamenty, stwierdzenie nabycia spadku, dział spadku, roszczenia o zachowek.",
+              "Sprawdź możliwe rozwiązania",
+            ],
+            [
+              "Spory z bankami",
+              "Analiza umów kredytowych, klauzule niedozwolone, roszczenia konsumenckie.",
+              "Przeanalizuj umowę",
+            ],
+            [
+              "Prawnik dla firm",
+              "Umowy B2B, spory z kontrahentami, windykacja i stała obsługa prawna.",
+              "Zabezpiecz firmę",
+            ],
+            [
+              "Prawo medyczne",
+              "Wsparcie lekarzy, gabinetów i podmiotów leczniczych w umowach, RODO i sporach.",
+              "Skonsultuj praktykę",
+            ],
+            [
+              "Mediacje",
+              "Pomoc w polubownym rozwiązaniu konfliktu bez przeciągania sprawy latami.",
+              "Zapytaj o mediację",
+            ],
+          ].map(([title, desc, cta]) => (
+            <article className="kp-special-card kp-reveal" key={title}>
+              <span>§</span>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+              <a href="#kontakt">{cta} →</a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="kp-section kp-dark" id="proces">
+        <div className="kp-section-head kp-reveal">
+          <p className="kp-eyebrow">Jak wygląda współpraca</p>
+          <h2>Cztery kroki od kontaktu do działania.</h2>
+          <p>
+            Od początku wiesz, co robimy, ile to kosztuje i jaki jest kolejny
+            krok.
+          </p>
+        </div>
+
+        <div className="kp-process-list">
+          {[
+            [
+              "01",
+              "Krótka rozmowa",
+              "Ustalamy, czy sprawa mieści się w obszarze naszej praktyki i jakie dokumenty będą potrzebne.",
+            ],
+            [
+              "02",
+              "Konsultacja właściwa",
+              "Analizujemy sytuację, omawiamy możliwe scenariusze i rekomendujemy strategię.",
+            ],
+            [
+              "03",
+              "Umowa i zakres",
+              "Dostajesz jasne warunki współpracy, zakres działań i sposób rozliczenia.",
+            ],
+            [
+              "04",
+              "Prowadzenie sprawy",
+              "Przygotowujemy dokumenty, negocjujemy albo reprezentujemy Cię przed sądem.",
+            ],
+          ].map(([num, title, desc]) => (
+            <div className="kp-process-item kp-reveal" key={num}>
+              <span>{num}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="kp-section kp-pricing" id="cennik">
+        <div className="kp-pricing-card kp-reveal">
+          <div>
+            <p className="kp-eyebrow kp-blue">Konsultacja prawna</p>
+            <h2>250 zł</h2>
+            <p>
+              Spotkanie online albo w kancelarii. Analiza sprawy, możliwe
+              scenariusze, ryzyka i rekomendowany plan działania.
+            </p>
+          </div>
+
+          <div className="kp-pricing-list">
+            <p>✓ bez ukrytych kosztów</p>
+            <p>✓ analiza dokumentów</p>
+            <p>✓ konkretna strategia</p>
+            <p>✓ wycena dalszego prowadzenia sprawy</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="kp-section kp-faq">
+        <div className="kp-section-head kp-reveal">
+          <p className="kp-eyebrow kp-blue">Pytania</p>
+          <h2>Najczęstsze pytania przed konsultacją.</h2>
+        </div>
+
+        <div className="kp-faq-list">
+          {[
+            [
+              "Czy pierwsza rozmowa jest płatna?",
+              "Krótka rozmowa organizacyjna jest bezpłatna. Pełna analiza sprawy odbywa się podczas konsultacji.",
+            ],
+            [
+              "Czy można spotkać się online?",
+              "Tak, konsultacje mogą odbywać się przez Google Meet, telefonicznie albo stacjonarnie.",
+            ],
+            [
+              "Czy od razu poznam koszt prowadzenia sprawy?",
+              "Po analizie dokumentów przedstawiamy zakres działań i orientacyjny koszt dalszej współpracy.",
+            ],
+          ].map(([q, a]) => (
+            <div className="kp-faq-item kp-reveal" key={q}>
+              <h3>{q}</h3>
+              <p>{a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="kp-contact" id="kontakt">
+        <div className="kp-contact-inner">
+          <div className="kp-reveal">
+            <p className="kp-eyebrow">Kontakt</p>
+            <h2>Zadzwoń albo zostaw wiadomość.</h2>
+            <p>
+              Najkrótsza droga do odpowiedzi to krótka rozmowa. Ustalimy, czy
+              możemy pomóc i jaki będzie kolejny krok.
+            </p>
+
+            <div className="kp-contact-details">
+              <a href="tel:600000000">600 000 000</a>
+              <a href="mailto:kontakt@kowalskipartners.pl">
+                kontakt@kowalskipartners.pl
+              </a>
+              <span>Pon-Pt: 9:00–18:00 · Warszawa / online</span>
+            </div>
+          </div>
+
+          <form className="kp-form kp-reveal">
             <input type="text" placeholder="Imię i nazwisko" />
             <input type="email" placeholder="Email" />
-            <input type="text" placeholder="Nazwa firmy" />
+            <input type="tel" placeholder="Telefon" />
             <textarea placeholder="Opisz krótko sprawę" />
             <button type="submit">Wyślij zapytanie</button>
           </form>
         </div>
       </section>
+
+      <footer className="kp-footer">
+        <p>
+          © 2026 Kowalski & Partners · Projekt demo wykonany przez NextByte
+        </p>
+      </footer>
     </main>
   );
 }
