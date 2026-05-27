@@ -15,7 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "NextByte | Nowoczesne strony internetowe",
   description:
-    "NextByte tworzy nowoczesne strony internetowe dla firm, landing page i profesjonalne portfolio.",
+    "NextByte tworzy nowoczesne strony internetowe dla firm, landing page i portfolio.",
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
