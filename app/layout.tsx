@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "NextByte",
-  description: "Nowoczesne strony internetowe dla firm",
+  description: "NextByte - Nowoczesne strony internetowe dla firm",
 };
 
 export default function RootLayout({
