@@ -45,9 +45,12 @@ export default function PortfolioWebsite() {
   Zobacz projekty
 </Link>
 
-              <button className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition">
-                Kontakt
-              </button>
+              <Link
+  href="/kontakt"
+  className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
+>
+  Kontakt
+</Link>
             </div>
           </div>
 
