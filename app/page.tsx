@@ -16,6 +16,24 @@ export default function PortfolioWebsite() {
     },
   ];
 
+  const testimonials = [
+    {
+      name: "Michał K.",
+      company: "Black Diamond Detailing",
+      text: "Strona wygląda premium, działa szybko i od razu lepiej prezentuje naszą ofertę klientom.",
+    },
+    {
+      name: "Anna W.",
+      company: "Kancelaria prawna",
+      text: "Profesjonalny kontakt, nowoczesny projekt i bardzo dobra wersja mobilna strony.",
+    },
+    {
+      name: "Piotr N.",
+      company: "Restauracja NERO",
+      text: "Dokładnie taki efekt chcieliśmy — elegancka strona, która wygląda świetnie na telefonie.",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-black text-white font-sans">
       {/* HERO */}
@@ -39,61 +57,41 @@ export default function PortfolioWebsite() {
 
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
-  href="/projekty"
-  className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
->
-  Zobacz projekty
-</Link>
+                href="/projekty"
+                className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
+              >
+                Zobacz projekty
+              </Link>
 
               <Link
-  href="/kontakt"
-  className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
->
-  Kontakt
-</Link>
+                href="/kontakt"
+                className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
+              >
+                Kontakt
+              </Link>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-5">
-            <div className="bg-zinc-900 border border-white/10 rounded-3xl p-6 h-56 flex flex-col justify-between">
-              <div className="text-zinc-400">🔥</div>
-              <div>
-                <h3 className="text-xl font-bold">Modern UI</h3>
-                <p className="text-zinc-400 mt-2 text-sm">
-                  Minimalistyczny i nowoczesny design.
-                </p>
+            {[
+              ["🔥", "Modern UI", "Minimalistyczny i nowoczesny design."],
+              ["⚡", "Fast Websites", "Szybkie strony zoptymalizowane pod SEO."],
+              ["📱", "Responsive", "Idealne działanie na telefonach i tabletach."],
+              ["🚀", "Premium Feel", "Strony wyglądające jak od dużych agencji."],
+            ].map(([icon, title, desc], index) => (
+              <div
+                key={title}
+                className={`bg-zinc-900 border border-white/10 rounded-3xl p-6 h-56 flex flex-col justify-between hover:-translate-y-2 hover:border-white/20 transition duration-300 ${
+                  index === 1 ? "mt-10" : index === 2 ? "-mt-6" : ""
+                }`}
+              >
+                <div className="text-zinc-400">{icon}</div>
+                <div>
+                  <h3 className="text-xl font-bold">{title}</h3>
+                  <p className="text-zinc-400 mt-2 text-sm">{desc}</p>
+                </div>
               </div>
-            </div>
-
-            <div className="bg-zinc-900 border border-white/10 rounded-3xl p-6 h-56 flex flex-col justify-between mt-10">
-              <div className="text-zinc-400">⚡</div>
-              <div>
-                <h3 className="text-xl font-bold">Fast Websites</h3>
-                <p className="text-zinc-400 mt-2 text-sm">
-                  Szybkie strony zoptymalizowane pod SEO.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-zinc-900 border border-white/10 rounded-3xl p-6 h-56 flex flex-col justify-between -mt-6">
-              <div className="text-zinc-400">📱</div>
-              <div>
-                <h3 className="text-xl font-bold">Responsive</h3>
-                <p className="text-zinc-400 mt-2 text-sm">
-                  Idealne działanie na telefonach i tabletach.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-zinc-900 border border-white/10 rounded-3xl p-6 h-56 flex flex-col justify-between">
-              <div className="text-zinc-400">🚀</div>
-              <div>
-                <h3 className="text-xl font-bold">Premium Feel</h3>
-                <p className="text-zinc-400 mt-2 text-sm">
-                  Strony wyglądające jak od dużych agencji.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -114,8 +112,8 @@ export default function PortfolioWebsite() {
           <div>
             <p className="text-zinc-400 text-lg leading-relaxed">
               Tworzę strony internetowe, które łączą nowoczesny design,
-              szybkość działania oraz skuteczność biznesową. Każdy projekt
-              jest responsywny i dostosowany do potrzeb klienta.
+              szybkość działania oraz skuteczność biznesową. Każdy projekt jest
+              responsywny i dostosowany do potrzeb klienta.
             </p>
           </div>
         </div>
@@ -128,7 +126,9 @@ export default function PortfolioWebsite() {
             <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
               Portfolio
             </p>
-            <h2 className="text-4xl lg:text-5xl font-black">Wybrane projekty</h2>
+            <h2 className="text-4xl lg:text-5xl font-black">
+              Wybrane projekty
+            </h2>
           </div>
         </div>
 
@@ -136,7 +136,7 @@ export default function PortfolioWebsite() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group bg-zinc-900 border border-white/10 rounded-[28px] overflow-hidden hover:border-white/20 transition"
+              className="group bg-zinc-900 border border-white/10 rounded-[28px] overflow-hidden hover:border-white/20 hover:-translate-y-2 transition duration-300"
             >
               <div className="h-56 bg-gradient-to-br from-zinc-800 to-zinc-950 flex items-center justify-center text-zinc-500 text-sm">
                 Preview projektu
@@ -183,9 +183,55 @@ export default function PortfolioWebsite() {
           ].map((tech) => (
             <div
               key={tech}
-              className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:bg-zinc-800 transition"
+              className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:bg-zinc-800 hover:-translate-y-1 transition duration-300"
             >
               <p className="font-semibold">{tech}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10">
+        <div className="text-center max-w-3xl mx-auto">
+          <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
+            Opinie
+          </p>
+
+          <h2 className="text-4xl lg:text-5xl font-black">
+            Firmy cenią NextByte za jakość i efekt.
+          </h2>
+
+          <p className="text-zinc-400 mt-6 text-lg leading-relaxed">
+            Przykładowe opinie klientów po wdrożeniu nowoczesnych stron
+            internetowych.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-8 mt-16">
+          {testimonials.map((opinion, index) => (
+            <div
+              key={index}
+              className="group relative bg-zinc-900 border border-white/10 rounded-[28px] p-7 overflow-hidden hover:border-white/30 hover:-translate-y-2 transition duration-300"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
+
+              <div className="relative">
+                <div className="flex gap-1 text-yellow-400 text-xl mb-6">
+                  ★★★★★
+                </div>
+
+                <p className="text-zinc-300 leading-relaxed">
+                  “{opinion.text}”
+                </p>
+
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <h3 className="font-bold text-lg">{opinion.name}</h3>
+                  <p className="text-zinc-500 text-sm mt-1">
+                    {opinion.company}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -203,32 +249,33 @@ export default function PortfolioWebsite() {
           </h2>
 
           <p className="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
-            Napisz do mnie i stwórzmy nowoczesną stronę internetową dla Twojej firmy.
+            Napisz do mnie i stwórzmy nowoczesną stronę internetową dla Twojej
+            firmy.
           </p>
 
           <div className="mt-10 flex justify-center gap-4 flex-wrap">
             <Link
-  href="/kontakt"
-  className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
->
-  Kontakt
-</Link>
+              href="/kontakt"
+              className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
+            >
+              Kontakt
+            </Link>
 
             <a
-  href="https://github.com/kryspinadamik31-dev"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
->
-  GitHub
-</a>
+              href="https://github.com/kryspinadamik31-dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
+            >
+              GitHub
+            </a>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
       <footer className="border-t border-white/10 py-8 px-6 text-center text-zinc-500 text-sm">
-        © 2026 Portfolio Website — Web Creator
+        © 2026 NextByte — Web Creator
       </footer>
     </div>
   );
