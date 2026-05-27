@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PortfolioWebsite() {
   const projects = [
     {
@@ -36,9 +38,12 @@ export default function PortfolioWebsite() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <button className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition">
-                Zobacz projekty
-              </button>
+              <Link
+  href="/projekty"
+  className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
+>
+  Zobacz projekty
+</Link>
 
               <button className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition">
                 Kontakt
