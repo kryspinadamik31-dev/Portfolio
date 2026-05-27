@@ -1,6 +1,11 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function PortfolioWebsite() {
+  const [showPopup, setShowPopup] = useState(false);
+
   const projects = [
     {
       title: "Detailing Studio",
@@ -10,7 +15,7 @@ export default function PortfolioWebsite() {
     {
       title: "Restaurant Landing",
       desc: "Elegancki landing page dla restauracji premium z rezerwacją online.",
-      href: "/projekty",
+      href: "/projekty/nero-restaurant",
     },
     {
       title: "Construction Company",
@@ -18,6 +23,33 @@ export default function PortfolioWebsite() {
       href: "/projekty",
     },
   ];
+
+  useEffect(() => {
+    const closed = sessionStorage.getItem("nextbytePopupClosed");
+    if (closed) return;
+
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 15000);
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "visible") {
+        setShowPopup(true);
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  function closePopup() {
+    sessionStorage.setItem("nextbytePopupClosed", "true");
+    setShowPopup(false);
+  }
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
@@ -237,6 +269,81 @@ export default function PortfolioWebsite() {
       <footer className="border-t border-white/10 py-8 px-6 text-center text-zinc-500 text-sm">
         © 2026 NextByte — Web Creator
       </footer>
+
+      {/* POPUP */}
+      {showPopup && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-md px-5">
+          <div className="relative w-full max-w-[520px] rounded-[28px] bg-white text-black border-t-4 border-zinc-900 p-8 md:p-10 text-center shadow-2xl animate-[popupIn_.35s_ease]">
+            <button
+              onClick={closePopup}
+              className="absolute top-4 right-5 text-3xl text-zinc-400 hover:text-black transition"
+              aria-label="Zamknij popup"
+            >
+              ×
+            </button>
+
+            <p className="uppercase tracking-[0.3em] text-xs font-black text-zinc-500 mb-4">
+              Zanim wyjdziesz
+            </p>
+
+            <h2 className="text-3xl md:text-4xl font-black leading-tight">
+              Masz minutę? Odezwij się.
+            </h2>
+
+            <p className="text-zinc-600 mt-4 leading-relaxed">
+              Wstępna rozmowa jest bezpłatna. Wybierz wygodny kontakt,
+              odpowiem osobiście.
+            </p>
+
+            <a
+              href="tel:882684053"
+              className="mt-7 flex items-center justify-center gap-3 w-full rounded-2xl bg-black text-white py-5 font-bold hover:scale-[1.02] transition"
+            >
+              ☎ Zadzwoń, 882 684 053
+            </a>
+
+            <div className="my-6 flex items-center gap-4 text-zinc-400 text-sm italic">
+              <span className="h-px flex-1 bg-zinc-200"></span>
+              albo
+              <span className="h-px flex-1 bg-zinc-200"></span>
+            </div>
+
+            <a
+              href="https://wa.me/48882684053"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 w-full rounded-2xl border-2 border-green-500 text-green-700 py-5 font-bold hover:bg-green-50 transition"
+            >
+              Napisz na WhatsApp
+            </a>
+
+            <Link
+              href="/kontakt"
+              onClick={closePopup}
+              className="mt-4 block w-full rounded-2xl border border-zinc-200 py-4 font-semibold text-zinc-700 hover:bg-zinc-100 transition"
+            >
+              Przejdź do formularza
+            </Link>
+
+            <small className="block mt-6 text-zinc-500">
+              Pn–Pt 9:00–19:00 · Rozmowa bez zobowiązań
+            </small>
+          </div>
+
+          <style jsx>{`
+            @keyframes popupIn {
+              from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.96);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+              }
+            }
+          `}</style>
+        </div>
+      )}
     </div>
   );
 }
