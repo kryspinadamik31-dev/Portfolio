@@ -12,13 +12,41 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "NextByte | Nowoczesne strony internetowe",
+export const metadata: Metadata = {
+  title:
+    "NextByte — Tworzenie nowoczesnych stron internetowych dla firm",
+
   description:
-    "NextByte tworzy nowoczesne strony internetowe dla firm, landing page i portfolio.",
+    "NextByte projektuje szybkie, responsywne i nowoczesne strony internetowe dla firm, landing page, portfolio oraz strony premium.",
+
+  keywords: [
+    "NextByte",
+    "strony internetowe",
+    "tworzenie stron internetowych",
+    "strony dla firm",
+    "landing page",
+    "nowoczesne strony www",
+    "projektowanie stron internetowych",
+  ],
+
   robots: {
     index: true,
     follow: true,
+  },
+
+  openGraph: {
+    title: "NextByte — Nowoczesne strony internetowe dla firm",
+
+    description:
+      "Tworzenie stron internetowych, landing page i portfolio dla firm.",
+
+    url: "https://www.nextbyte.com.pl",
+
+    siteName: "NextByte",
+
+    locale: "pl_PL",
+
+    type: "website",
   },
 };
 
@@ -29,10 +57,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+      </body>
     </html>
   );
 }
