@@ -207,9 +207,12 @@ export default function PortfolioWebsite() {
           </p>
 
           <div className="mt-10 flex justify-center gap-4 flex-wrap">
-            <button className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition">
-              Kontakt
-            </button>
+            <Link
+  href="/kontakt"
+  className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
+>
+  Kontakt
+</Link>
 
             <button className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition">
               GitHub
