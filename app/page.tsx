@@ -214,9 +214,14 @@ export default function PortfolioWebsite() {
   Kontakt
 </Link>
 
-            <button className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition">
-              GitHub
-            </button>
+            <a
+  href="https://github.com/kryspinadamik31-dev"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
+>
+  GitHub
+</a>
           </div>
         </div>
       </section>
