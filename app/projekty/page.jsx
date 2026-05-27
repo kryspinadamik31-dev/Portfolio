@@ -7,18 +7,21 @@ export default function ProjektyPage() {
       category: "Auto Detailing",
       desc: "Luksusowa strona dla studia auto detailingu z ciemnym designem, ofertą usług i sekcją rezerwacji.",
       tags: ["Landing Page", "Premium UI", "SEO"],
+      href: "/projekty/black-diamond-detailing",
     },
     {
       title: "Kowalski & Partners",
       category: "Kancelaria prawna",
       desc: "Profesjonalna strona kancelarii nastawiona na zaufanie, przejrzystość usług i kontakt z klientem.",
       tags: ["Corporate", "Business", "Responsive"],
+      href: "/projekty/kowalski-partners",
     },
     {
       title: "NERO Restaurant",
       category: "Restauracja premium",
       desc: "Elegancka strona restauracji z galerią, menu, sekcją szefa kuchni i rezerwacją stolika.",
       tags: ["Luxury", "Food", "Modern Design"],
+      href: "/projekty/nero-restaurant",
     },
   ];
 
@@ -48,12 +51,17 @@ export default function ProjektyPage() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group bg-zinc-900 border border-white/10 rounded-[32px] overflow-hidden hover:border-white/30 transition"
+              className="group bg-zinc-900 border border-white/10 rounded-[32px] overflow-hidden hover:border-white/30 hover:-translate-y-2 transition duration-300"
             >
               <div className="h-64 bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex items-center justify-center">
                 <div className="text-center">
-                  <p className="text-zinc-500 text-sm">{project.category}</p>
-                  <h2 className="text-2xl font-bold mt-2">{project.title}</h2>
+                  <p className="text-zinc-500 text-sm">
+                    {project.category}
+                  </p>
+
+                  <h2 className="text-2xl font-bold mt-2">
+                    {project.title}
+                  </h2>
                 </div>
               </div>
 
@@ -73,9 +81,12 @@ export default function ProjektyPage() {
                   ))}
                 </div>
 
-                <button className="mt-8 w-full px-5 py-3 rounded-xl bg-white text-black font-semibold hover:scale-105 transition">
+                <Link
+                  href={project.href}
+                  className="mt-8 block text-center w-full px-5 py-3 rounded-xl bg-white text-black font-semibold hover:scale-105 transition"
+                >
                   Zobacz projekt
-                </button>
+                </Link>
               </div>
             </div>
           ))}
