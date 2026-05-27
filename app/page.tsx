@@ -25,31 +25,34 @@ export default function PortfolioWebsite() {
   ];
 
   useEffect(() => {
-    const closed = sessionStorage.getItem("nextbytePopupClosed");
-    if (closed) return;
+  const closed = sessionStorage.getItem("nextbytePopupClosed");
 
-    const timer = setTimeout(() => {
-      setShowPopup(true);
-    }, 15000);
+  if (closed) return;
 
-    function handleVisibilityChange() {
-      if (document.visibilityState === "visible") {
+  let timeout;
+
+  function handleVisibilityChange() {
+    if (document.visibilityState === "hidden") {
+      timeout = setTimeout(() => {
         setShowPopup(true);
-      }
+      }, 20000);
     }
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
-
-  function closePopup() {
-    sessionStorage.setItem("nextbytePopupClosed", "true");
-    setShowPopup(false);
+    if (document.visibilityState === "visible") {
+      clearTimeout(timeout);
+    }
   }
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  return () => {
+    clearTimeout(timeout);
+    document.removeEventListener(
+      "visibilitychange",
+      handleVisibilityChange
+    );
+  };
+}, []);
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
