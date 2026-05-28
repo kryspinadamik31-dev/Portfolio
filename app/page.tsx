@@ -108,7 +108,7 @@ export default function PortfolioWebsite() {
             </h1>
 
             <p className="mt-8 text-zinc-400 text-lg leading-relaxed max-w-xl">
-              Projektuję szybkie, nowoczesne i responsywne strony internetowe,
+              Projektujemy szybkie, nowoczesne i responsywne strony internetowe,
               które pomagają firmom wyglądać profesjonalnie i zdobywać klientów.
             </p>
 
