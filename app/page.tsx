@@ -273,43 +273,100 @@ export default function PortfolioWebsite() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 py-28 border-t border-white/10 reveal">
-        <div className="bg-zinc-900 border border-white/10 rounded-[32px] p-10 lg:p-20 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40" />
+  <div className="bg-zinc-900 border border-white/10 rounded-[32px] p-10 lg:p-20 text-center relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40" />
 
-          <div className="relative">
-            <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
-              Kontakt
-            </p>
+    <div className="relative">
+      <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
+        Kontakt
+      </p>
 
-            <h2 className="text-4xl lg:text-6xl font-black leading-tight">
-              Masz pomysł na stronę?
-            </h2>
+      <h2 className="text-4xl lg:text-6xl font-black leading-tight">
+        Masz pomysł na stronę?
+      </h2>
 
-            <p className="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
-              Napisz do nas i stwórzmy nowoczesną stronę internetową dla Twojej
-              firmy.
-            </p>
+      <p className="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
+        Napisz do nas i stwórzmy nowoczesną stronę internetową dla Twojej
+        firmy.
+      </p>
 
-            <div className="mt-10 flex justify-center gap-4 flex-wrap">
-              <Link
-                href="/kontakt"
-                className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
-              >
-                Kontakt
-              </Link>
+      <div className="mt-10 flex justify-center gap-4 flex-wrap">
+        <Link
+          href="/kontakt"
+          className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
+        >
+          Kontakt
+        </Link>
 
-              <a
-                href="https://github.com/kryspinadamik31-dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
+        <a
+          href="https://github.com/kryspinadamik31-dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
+        >
+          GitHub
+        </a>
+      </div>
+
+      {/* SOCIALS */}
+
+      <div className="mt-14 pt-10 border-t border-white/10">
+        <p className="text-zinc-500 uppercase tracking-[0.3em] text-xs mb-7">
+          Social media
+        </p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl mx-auto">
+          {[
+            {
+              name: "Instagram",
+              icon: "📸",
+              href: "https://instagram.com/nextbyte",
+              glow: "hover:shadow-pink-500/20",
+            },
+            {
+              name: "TikTok",
+              icon: "🎵",
+              href: "https://tiktok.com/@nextbyte",
+              glow: "hover:shadow-white/20",
+            },
+            {
+              name: "Facebook",
+              icon: "📘",
+              href: "https://facebook.com/nextbyte",
+              glow: "hover:shadow-blue-500/20",
+            },
+            {
+              name: "GitHub",
+              icon: "💻",
+              href: "https://github.com/kryspinadamik31-dev",
+              glow: "hover:shadow-zinc-500/20",
+            },
+          ].map((social) => (
+            <a
+              key={social.name}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 transition-all duration-500 shadow-2xl ${social.glow}`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
+
+              <div className="relative flex flex-col items-center justify-center">
+                <span className="text-4xl group-hover:scale-125 transition-transform duration-500">
+                  {social.icon}
+                </span>
+
+                <span className="mt-4 font-semibold text-zinc-300 group-hover:text-white transition">
+                  {social.name}
+                </span>
+              </div>
+            </a>
+          ))}
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       <footer className="border-t border-white/10 py-8 px-6 text-center text-zinc-500 text-sm">
         © 2026 NextByte — Web Creator
