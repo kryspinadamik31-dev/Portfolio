@@ -115,7 +115,7 @@ export default function PortfolioWebsite() {
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-black leading-tight tracking-tight">
-              Tworzę nowoczesne strony dla firm.
+              Tworzymy nowoczesne strony dla firm.
             </h1>
 
             <p className="mt-8 text-zinc-400 text-lg leading-relaxed max-w-xl">
@@ -247,7 +247,7 @@ export default function PortfolioWebsite() {
           </p>
 
           <h2 className="text-4xl lg:text-5xl font-black">
-            Stack, którego używam
+            Stack, którego używamy
           </h2>
         </div>
 
