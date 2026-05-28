@@ -41,11 +41,11 @@ export default function KontaktPage() {
               <div className="bg-zinc-900 border border-white/10 rounded-3xl p-6">
                 <p className="text-zinc-500 text-sm">GitHub</p>
                 <a
-                  href="https://github.com/kryspinadamik31-dev"
+                  href="https://github.com/NextByte-web"
                   target="_blank"
                   className="block mt-2 text-lg font-semibold"
                 >
-                  kryspinadamik31-dev
+                  NextByte-web
                 </a>
               </div>
             </div>

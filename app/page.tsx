@@ -329,7 +329,7 @@ export default function PortfolioWebsite() {
                   {
                     name: "GitHub",
                     icon: "https://cdn.simpleicons.org/github/ffffff",
-                    href: "https://github.com/kryspinadamik31-dev",
+                    href: "https://github.com/NextByte-web",
                     glow: "hover:shadow-zinc-500/20",
                   },
                 ].map((social) => (
