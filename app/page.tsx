@@ -367,6 +367,7 @@ export default function PortfolioWebsite() {
     ))}
   </div>
 </div>
+</div>
 </section>
 
       <footer className="border-t border-white/10 py-8 px-6 text-center text-zinc-500 text-sm">
