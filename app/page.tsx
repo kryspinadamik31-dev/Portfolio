@@ -19,8 +19,8 @@ export default function PortfolioWebsite() {
       href: "/projekty/nero-restaurant",
     },
     {
-      title: "Construction Company",
-      desc: "Profesjonalna strona firmy budowlanej nastawiona na pozyskiwanie klientów.",
+      title: "Kowalski & Partners",
+      desc: "Profesjonalna strona kancelarii prawnej nastawiona na zaufanie i kontakt z klientem.",
       href: "/projekty/kowalski-partners",
     },
   ];
@@ -29,6 +29,12 @@ export default function PortfolioWebsite() {
     function handleScroll() {
       const scrollTop = window.scrollY;
       const docHeight = document.body.scrollHeight - window.innerHeight;
+
+      if (docHeight <= 0) {
+        setScrollProgress(0);
+        return;
+      }
+
       setScrollProgress((scrollTop / docHeight) * 100);
     }
 
@@ -39,7 +45,7 @@ export default function PortfolioWebsite() {
   }, []);
 
   useEffect(() => {
-    const elements = document.querySelectorAll(".reveal");
+    const elements = document.querySelectorAll<HTMLElement>(".reveal");
 
     function revealOnScroll() {
       elements.forEach((el) => {
@@ -58,35 +64,29 @@ export default function PortfolioWebsite() {
   }, []);
 
   useEffect(() => {
-  const closed = sessionStorage.getItem("nextbytePopupClosed");
-  if (closed) return;
+    const closed = sessionStorage.getItem("nextbytePopupClosed");
 
-  let timeout: ReturnType<typeof setTimeout>;
+    if (closed) return;
 
-  function handleVisibilityChange() {
-    if (document.visibilityState === "hidden") {
-      timeout = setTimeout(() => {
-        setShowPopup(true);
-      }, 20000);
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "hidden") {
+        timeout = setTimeout(() => {
+          setShowPopup(true);
+        }, 20000);
+      }
+
+      if (document.visibilityState === "visible" && timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
     }
-
-    if (document.visibilityState === "visible") {
-      clearTimeout(timeout);
-    }
-  }
-
-  document.addEventListener("visibilitychange", handleVisibilityChange);
-
-  return () => {
-    clearTimeout(timeout);
-    document.removeEventListener("visibilitychange", handleVisibilityChange);
-  };
-}, []);
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      clearTimeout(timeout);
+      if (timeout) clearTimeout(timeout);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
@@ -98,7 +98,10 @@ export default function PortfolioWebsite() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans overflow-hidden">
-      <div className="fixed top-0 left-0 z-[9999] h-1 bg-white transition-all duration-150" style={{ width: `${scrollProgress}%` }} />
+      <div
+        className="fixed top-0 left-0 z-[9999] h-1 bg-white transition-all duration-150"
+        style={{ width: `${scrollProgress}%` }}
+      />
 
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-950 opacity-90" />
@@ -121,11 +124,17 @@ export default function PortfolioWebsite() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="/projekty" className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition">
+              <Link
+                href="/projekty"
+                className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
+              >
                 Zobacz projekty
               </Link>
 
-              <Link href="/kontakt" className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition">
+              <Link
+                href="/kontakt"
+                className="px-7 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
+              >
                 Kontakt
               </Link>
             </div>
@@ -168,9 +177,9 @@ export default function PortfolioWebsite() {
           </div>
 
           <p className="text-zinc-400 text-lg leading-relaxed">
-            Tworzymy strony internetowe, które łączą nowoczesny design,
-            szybkość działania oraz skuteczność biznesową. Każdy projekt jest
-            responsywny i dostosowany do potrzeb klienta.
+            Tworzymy strony internetowe, które łączą nowoczesny design, szybkość
+            działania oraz skuteczność biznesową. Każdy projekt jest responsywny
+            i dostosowany do potrzeb klienta.
           </p>
         </div>
       </section>
@@ -186,7 +195,10 @@ export default function PortfolioWebsite() {
 
         <div className="grid lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div key={index} className="group bg-zinc-900 border border-white/10 rounded-[28px] overflow-hidden hover:border-white/30 hover:-translate-y-2 transition duration-300">
+            <div
+              key={index}
+              className="group bg-zinc-900 border border-white/10 rounded-[28px] overflow-hidden hover:border-white/30 hover:-translate-y-2 transition duration-300"
+            >
               <div className="h-64 bg-black p-4">
                 <div className="h-full rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 group-hover:scale-[1.03] transition duration-500">
                   <div className="h-8 bg-zinc-900 border-b border-white/10 flex items-center gap-2 px-4">
@@ -216,7 +228,10 @@ export default function PortfolioWebsite() {
                   {project.desc}
                 </p>
 
-                <Link href={project.href} className="mt-8 inline-block px-5 py-3 rounded-xl bg-white text-black font-semibold hover:scale-105 transition">
+                <Link
+                  href={project.href}
+                  className="mt-8 inline-block px-5 py-3 rounded-xl bg-white text-black font-semibold hover:scale-105 transition"
+                >
                   Live Demo
                 </Link>
               </div>
@@ -237,8 +252,20 @@ export default function PortfolioWebsite() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-          {["React", "Next.js", "Tailwind", "WordPress", "JavaScript", "Framer Motion", "SEO", "Vercel"].map((tech) => (
-            <div key={tech} className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:bg-zinc-800 hover:-translate-y-1 transition duration-300">
+          {[
+            "React",
+            "Next.js",
+            "Tailwind",
+            "WordPress",
+            "JavaScript",
+            "Framer Motion",
+            "SEO",
+            "Vercel",
+          ].map((tech) => (
+            <div
+              key={tech}
+              className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:bg-zinc-800 hover:-translate-y-1 transition duration-300"
+            >
               <p className="font-semibold">{tech}</p>
             </div>
           ))}
@@ -259,15 +286,24 @@ export default function PortfolioWebsite() {
             </h2>
 
             <p className="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
-              Napisz do nas i stwórzmy nowoczesną stronę internetową dla Twojej firmy.
+              Napisz do nas i stwórzmy nowoczesną stronę internetową dla Twojej
+              firmy.
             </p>
 
             <div className="mt-10 flex justify-center gap-4 flex-wrap">
-              <Link href="/kontakt" className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition">
+              <Link
+                href="/kontakt"
+                className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
+              >
                 Kontakt
               </Link>
 
-              <a href="https://github.com/kryspinadamik31-dev" target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition">
+              <a
+                href="https://github.com/kryspinadamik31-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/10 transition"
+              >
                 GitHub
               </a>
             </div>
@@ -279,14 +315,22 @@ export default function PortfolioWebsite() {
         © 2026 NextByte — Web Creator
       </footer>
 
-      <Link href="/kontakt" className="fixed bottom-6 right-6 z-50 hidden md:flex items-center gap-3 px-5 py-4 rounded-2xl bg-white text-black font-bold shadow-2xl hover:scale-105 transition">
+      <Link
+        href="/kontakt"
+        className="fixed bottom-6 right-6 z-50 hidden md:flex items-center gap-3 px-5 py-4 rounded-2xl bg-white text-black font-bold shadow-2xl hover:scale-105 transition"
+      >
         ✉️ Darmowa wycena
       </Link>
 
       {showPopup && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-md px-5">
           <div className="relative w-full max-w-[520px] rounded-[28px] bg-white text-black border-t-4 border-zinc-900 p-8 md:p-10 text-center shadow-2xl animate-[popupIn_.35s_ease]">
-            <button onClick={closePopup} className="absolute top-4 right-5 text-3xl text-zinc-400 hover:text-black transition" aria-label="Zamknij popup">
+            <button
+              type="button"
+              onClick={closePopup}
+              className="absolute top-4 right-5 text-3xl text-zinc-400 hover:text-black transition"
+              aria-label="Zamknij popup"
+            >
               ×
             </button>
 
@@ -303,7 +347,10 @@ export default function PortfolioWebsite() {
               odpowiem osobiście.
             </p>
 
-            <a href="tel:882684053" className="mt-7 flex items-center justify-center gap-3 w-full rounded-2xl bg-black text-white py-5 font-bold hover:scale-[1.02] transition">
+            <a
+              href="tel:882684053"
+              className="mt-7 flex items-center justify-center gap-3 w-full rounded-2xl bg-black text-white py-5 font-bold hover:scale-[1.02] transition"
+            >
               ☎ Zadzwoń, 882 684 053
             </a>
 
@@ -313,11 +360,20 @@ export default function PortfolioWebsite() {
               <span className="h-px flex-1 bg-zinc-200"></span>
             </div>
 
-            <a href="https://wa.me/48882684053" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 w-full rounded-2xl border-2 border-green-500 text-green-700 py-5 font-bold hover:bg-green-50 transition">
+            <a
+              href="https://wa.me/48882684053"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 w-full rounded-2xl border-2 border-green-500 text-green-700 py-5 font-bold hover:bg-green-50 transition"
+            >
               Napisz na WhatsApp
             </a>
 
-            <Link href="/kontakt" onClick={closePopup} className="mt-4 block w-full rounded-2xl border border-zinc-200 py-4 font-semibold text-zinc-700 hover:bg-zinc-100 transition">
+            <Link
+              href="/kontakt"
+              onClick={closePopup}
+              className="mt-4 block w-full rounded-2xl border border-zinc-200 py-4 font-semibold text-zinc-700 hover:bg-zinc-100 transition"
+            >
               Przejdź do formularza
             </Link>
 
