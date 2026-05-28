@@ -310,62 +310,62 @@ export default function PortfolioWebsite() {
 
       {/* SOCIALS */}
 
-      <div className="mt-14 pt-10 border-t border-white/10">
-        <p className="text-zinc-500 uppercase tracking-[0.3em] text-xs mb-7">
-          Social media
-        </p>
+<div className="mt-14 pt-10 border-t border-white/10">
+  <p className="text-zinc-500 uppercase tracking-[0.3em] text-xs mb-7">
+    Social media
+  </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl mx-auto">
-          {[
-            {
-              name: "Instagram",
-              icon: "📸",
-              href: "https://instagram.com/nextbyte",
-              glow: "hover:shadow-pink-500/20",
-            },
-            {
-              name: "TikTok",
-              icon: "🎵",
-              href: "https://tiktok.com/@nextbyte",
-              glow: "hover:shadow-white/20",
-            },
-            {
-              name: "Facebook",
-              icon: "📘",
-              href: "https://facebook.com/nextbyte",
-              glow: "hover:shadow-blue-500/20",
-            },
-            {
-              name: "GitHub",
-              icon: "💻",
-              href: "https://github.com/kryspinadamik31-dev",
-              glow: "hover:shadow-zinc-500/20",
-            },
-          ].map((social) => (
-            <a
-              key={social.name}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 transition-all duration-500 shadow-2xl ${social.glow}`}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl mx-auto">
+    {[
+      {
+        name: "Instagram",
+        icon: "https://cdn.simpleicons.org/instagram/ffffff",
+        href: "https://instagram.com/nextbyte",
+        glow: "hover:shadow-pink-500/20",
+      },
+      {
+        name: "TikTok",
+        icon: "https://cdn.simpleicons.org/tiktok/ffffff",
+        href: "https://tiktok.com/@nextbyte",
+        glow: "hover:shadow-white/20",
+      },
+      {
+        name: "Facebook",
+        icon: "https://cdn.simpleicons.org/facebook/ffffff",
+        href: "https://facebook.com/nextbyte",
+        glow: "hover:shadow-blue-500/20",
+      },
+      {
+        name: "GitHub",
+        icon: "https://cdn.simpleicons.org/github/ffffff",
+        href: "https://github.com/kryspinadamik31-dev",
+        glow: "hover:shadow-zinc-500/20",
+      },
+    ].map((social) => (
+      <a
+        key={social.name}
+        href={social.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 transition-all duration-500 shadow-2xl ${social.glow}`}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
 
-              <div className="relative flex flex-col items-center justify-center">
-                <span className="text-4xl group-hover:scale-125 transition-transform duration-500">
-                  {social.icon}
-                </span>
+        <div className="relative flex flex-col items-center justify-center">
+          <img
+            src={social.icon}
+            alt={social.name}
+            className="w-10 h-10 group-hover:scale-125 transition-transform duration-500"
+          />
 
-                <span className="mt-4 font-semibold text-zinc-300 group-hover:text-white transition">
-                  {social.name}
-                </span>
-              </div>
-            </a>
-          ))}
+          <span className="mt-4 font-semibold text-zinc-300 group-hover:text-white transition">
+            {social.name}
+          </span>
         </div>
-      </div>
-    </div>
+      </a>
+    ))}
   </div>
+</div>
 </section>
 
       <footer className="border-t border-white/10 py-8 px-6 text-center text-zinc-500 text-sm">
