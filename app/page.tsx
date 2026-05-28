@@ -58,22 +58,30 @@ export default function PortfolioWebsite() {
   }, []);
 
   useEffect(() => {
-    const closed = sessionStorage.getItem("nextbytePopupClosed");
-    if (closed) return;
+  const closed = sessionStorage.getItem("nextbytePopupClosed");
+  if (closed) return;
 
-    let timeout;
+  let timeout: ReturnType<typeof setTimeout>;
 
-    function handleVisibilityChange() {
-      if (document.visibilityState === "hidden") {
-        timeout = setTimeout(() => {
-          setShowPopup(true);
-        }, 20000);
-      }
-
-      if (document.visibilityState === "visible") {
-        clearTimeout(timeout);
-      }
+  function handleVisibilityChange() {
+    if (document.visibilityState === "hidden") {
+      timeout = setTimeout(() => {
+        setShowPopup(true);
+      }, 20000);
     }
+
+    if (document.visibilityState === "visible") {
+      clearTimeout(timeout);
+    }
+  }
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  return () => {
+    clearTimeout(timeout);
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+  };
+}, []);
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
