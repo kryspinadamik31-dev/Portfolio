@@ -151,16 +151,16 @@ export default function PortfolioWebsite() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm mb-4">
-              O mnie
+              O nas
             </p>
 
             <h2 className="text-4xl lg:text-5xl font-black leading-tight">
-              Pomagam firmom budować profesjonalny wizerunek online.
+              Pomagamy firmom budować profesjonalny wizerunek online.
             </h2>
           </div>
 
           <p className="text-zinc-400 text-lg leading-relaxed">
-            Tworzę strony internetowe, które łączą nowoczesny design,
+            Tworzymy strony internetowe, które łączą nowoczesny design,
             szybkość działania oraz skuteczność biznesową. Każdy projekt jest
             responsywny i dostosowany do potrzeb klienta.
           </p>
@@ -251,7 +251,7 @@ export default function PortfolioWebsite() {
             </h2>
 
             <p className="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
-              Napisz do mnie i stwórzmy nowoczesną stronę internetową dla Twojej firmy.
+              Napisz do nas i stwórzmy nowoczesną stronę internetową dla Twojej firmy.
             </p>
 
             <div className="mt-10 flex justify-center gap-4 flex-wrap">
