@@ -105,7 +105,7 @@ export default function NyroxWebsite() {
         <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-7">
           <div className="flex items-center gap-3">
             <img
-              src="/nyrox-logo.png"
+              src="nyrox-logo.png"
               alt="Nyrox logo"
               className="h-11 w-11 rounded-2xl border border-white/10 object-cover shadow-[0_0_30px_rgba(168,85,247,.35)]"
             />
@@ -195,7 +195,7 @@ export default function NyroxWebsite() {
             <div className="relative rounded-[44px] border border-white/10 bg-white/[0.04] p-6 shadow-2xl backdrop-blur-xl">
               <div className="overflow-hidden rounded-[32px] border border-white/10 bg-black">
                 <img
-                  src="/nyrox-logo.png"
+                  src="nyrox-logo.png"
                   alt="Nyrox branding"
                   className="aspect-square w-full object-cover"
                 />
