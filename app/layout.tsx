@@ -13,42 +13,92 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title:
-    "NextByte — Tworzenie nowoczesnych stron internetowych dla firm",
+  metadataBase: new URL("https://www.nyrox.pl"),
+
+  title: {
+    default: "Nyrox — Premium Web Design Studio",
+    template: "%s | Nyrox",
+  },
 
   description:
-    "NextByte projektuje szybkie, responsywne i nowoczesne strony internetowe dla firm, landing page, portfolio oraz strony premium.",
+    "Nyrox projektuje nowoczesne, szybkie i profesjonalne strony internetowe dla firm. Landing page, strony premium, portfolio i nowoczesne rozwiązania webowe.",
 
   keywords: [
-    "NextByte",
+    "Nyrox",
     "strony internetowe",
     "tworzenie stron internetowych",
-    "strony dla firm",
+    "projektowanie stron www",
     "landing page",
-    "nowoczesne strony www",
-    "projektowanie stron internetowych",
+    "web design",
+    "strony premium",
+    "strony dla firm",
+    "next.js",
+    "frontend",
+    "responsive design",
+    "seo",
+    "web developer",
+    "portfolio",
   ],
+
+  authors: [
+    {
+      name: "Nyrox",
+    },
+  ],
+
+  creator: "Nyrox",
+  publisher: "Nyrox",
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 
   openGraph: {
-    title: "NextByte — Nowoczesne strony internetowe dla firm",
+    title: "Nyrox — Premium Web Design Studio",
 
     description:
-      "Tworzenie stron internetowych, landing page i portfolio dla firm.",
+      "Nowoczesne strony internetowe dla firm. Szybkie, responsywne i zaprojektowane z myślą o pozyskiwaniu klientów.",
 
-    url: "https://www.nextbyte.com.pl",
+    url: "https://www.nyrox.pl",
 
-    siteName: "NextByte",
+    siteName: "Nyrox",
 
     locale: "pl_PL",
 
     type: "website",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Nyrox",
+      },
+    ],
   },
-  
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Nyrox — Premium Web Design Studio",
+    description:
+      "Nowoczesne strony internetowe dla firm. Landing page, portfolio i strony premium.",
+    images: ["/og-image.png"],
+  },
+
+  alternates: {
+    canonical: "https://www.nyrox.pl",
+  },
 };
 
 export default function RootLayout({
@@ -61,7 +111,7 @@ export default function RootLayout({
       lang="pl"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-[#030005] text-white">
         {children}
       </body>
     </html>
