@@ -113,7 +113,7 @@ export default function KontaktPage() {
                 <input
                   type="hidden"
                   name="access_key"
-                  value="657ffc26-ee39-46eb-b301-aa75487d0b6d"
+                  value="0200d332-e898-42c2-87ab-15a4e1fd4f73"
                 />
 
                 <input
